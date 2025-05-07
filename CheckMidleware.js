@@ -10,7 +10,7 @@ const checkToken = (req, res, next) => {
  if (req.query.token != process.env.MyToken) {
   res.send({
    status: 0,
-   message: "PLease inter the correct token"
+   message: "Please inter the correct token"
   })
  }
  next()
