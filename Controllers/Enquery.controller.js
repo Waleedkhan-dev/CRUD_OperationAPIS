@@ -1,7 +1,7 @@
 import { Enquery } from "../models/enquery.model.js";
 
 const inerstEnquery = async (req, res) => {
- const EnqueryId = req.params.id
+ // const EnqueryId = req.params.id
  const { name, email, phone, message } = req.body
  const addEnquery = new Enquery({
   name: name,
