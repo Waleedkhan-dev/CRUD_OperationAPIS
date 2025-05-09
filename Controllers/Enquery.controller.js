@@ -22,6 +22,8 @@ const getEnquery = async (req, res) => {
 }
 const UpadetEnquery = async (req, res) => {
  const upadateId = req.params.id
+ console.log(upadateId);
+
  const { name, email, phone, message } = req.body
  const NewObj = {
   name: name,
