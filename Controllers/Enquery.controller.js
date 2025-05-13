@@ -26,10 +26,10 @@ const UpadetEnquery = async (req, res) => {
 
  const { name, email, phone, message } = req.body
  const NewObj = {
-  name: name,
-  email: email,
-  phone: phone,
-  message: message
+  name,
+  email,
+  phone,
+  message
  }
  const UpdateRes = await Enquery.updateOne({ _id: upadateId }, NewObj)
  res.status(200).json({ status: 1, message: "Data is upoadte successfuly", newRes: UpdateRes })
