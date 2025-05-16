@@ -16,28 +16,62 @@ const inerstEnquery = async (req, res) => {
  })
 }
 
+// const getEnquery = async (req, res) => {
+
+//  try {
+//   const page = parseInt(req.query.page) || 1
+//   const limit = parseInt(req.query.limit) || 6
+//   const skip = (page - 1) * limit
+//   const dataEnquery = await Enquery.find().skip(skip).limit(limit)
+//   const total = await Enquery.countDocuments();
+
+//   res.status(200).json({
+//    status: 1,
+//    message: "Data fetch successfully",
+//    totalpages: Math.ceil(total / limit),
+//    currentpages: page,
+//    totalItems: total,
+//    EnquerList: dataEnquery
+
+//   })
+//  } catch (error) {
+//   res.status(500).json({ status: 0, message: "internal server error" })
+//  }
+
+
+
+
+// }
 const getEnquery = async (req, res) => {
- const page = parseInt(req.query.page) || 1
- const limit = parseInt(req.query.limit) || 6
- const skip = (page - 1) * limit
-
  try {
-  const total = await Enquery.countDocuments()
-  const dataEnquery = await Enquery.find()
-   .skip(skip)
-   .limit(limit)
-   .sort({ createdAt: -1 })
-  res.status(200).json({ status: 1, message: "hello this all data ", EnqueryList: dataEnquery, total, page, limit, totalPage: Math.ceil(total / limit) })
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 6;
+  const skip = (page - 1) * limit;
 
+  // Get paginated data
+  const dataEnquery = await Enquery.find().skip(skip).limit(limit);
 
+  // Get total count of documents
+  const total = await Enquery.countDocuments();
+
+  res.status(200).json({
+   status: 1,
+   message: "Paginated Enquery List",
+   totalPages: Math.ceil(total / limit),
+   currentPage: page,
+   totalItems: total,
+   EnqueryList: dataEnquery
+  });
  } catch (error) {
-  res.status(500).json({ message: "Failed to fetch enquiries", error });
+  res.status(500).json({ status: 0, message: "Server Error", error });
  }
+};
 
-}
+
+
 const UpadetEnquery = async (req, res) => {
  const upadateId = req.params.id
- console.log(upadateId);
+ // console.log(upadateId);
 
  const { name, email, phone, message } = req.body
  const NewObj = {
